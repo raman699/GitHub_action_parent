@@ -23,3 +23,32 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           directory: '/' # Path to the directory containing your Maven project
           package_manager: maven
+
+
+
+name: Dependabot Maven Updates
+
+on:
+  push:
+    branches:
+      - main # Adjust to match your main branch name
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11' # Change to your preferred Java version
+
+      - name: Run Maven Dependabot
+        uses: dependabot/dependabot-core@v0.158.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: '/' # Path to the directory containing your Maven project
+          package_manager: maven
